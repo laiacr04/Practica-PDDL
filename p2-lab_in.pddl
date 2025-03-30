@@ -19,11 +19,11 @@
     (grimmy-a loc-2-2)
 
     ; Connexions entre ubicacions i passadissos 
-    (connectat loc-1-2 loc-2-2 c1222) ;(connectat loc-2-2 loc-1-2 c1222)
-    (connectat loc-2-1 loc-2-2 c2122) ;(connectat loc-2-2 loc-2-1 c2122)
-    (connectat loc-2-2 loc-2-3 c2223) ;(connectat loc-2-3 loc-2-2 c2223)
-    (connectat loc-2-3 loc-2-4 c2324) ;(connectat loc-2-4 loc-2-3 c2324)
-    (connectat loc-2-2 loc-3-2 c2232) ;(connectat loc-3-2 loc-2-2 c2232)
+    (connectat loc-1-2 loc-2-2 c1222) (connectat loc-2-2 loc-1-2 c1222)
+    (connectat loc-2-1 loc-2-2 c2122) (connectat loc-2-2 loc-2-1 c2122)
+    (connectat loc-2-2 loc-2-3 c2223) (connectat loc-2-3 loc-2-2 c2223)
+    (connectat loc-2-3 loc-2-4 c2324) (connectat loc-2-4 loc-2-3 c2324)
+    (connectat loc-2-2 loc-3-2 c2232) (connectat loc-3-2 loc-2-2 c2232)
 
 
     ; Ubicacio de les claus 
