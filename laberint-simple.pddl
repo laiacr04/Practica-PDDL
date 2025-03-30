@@ -88,7 +88,7 @@
     :precondition (and
       (grimmy-a ?des_de)
       (connectat ?fins_a ?des_de ?pas)
-      (obert ?pas)
+      (or (obert ?pas) (not (bloquejat ?pas ?col)))
     )
     :effect (and
       (not (grimmy-a ?des_de))
