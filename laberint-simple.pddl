@@ -70,14 +70,17 @@
     :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
     :precondition (and
       (grimmy-a ?loc)
-      (connectat ?loc ?dest ?pas)
+      (or 
+      (connectat ?loc ?dest ?pas) 
+      (connectat ?dest ?loc ?pas)  
+      )
       (bloquejat ?pas ?col)
       (te-clau ?c)
       (color-clau ?c ?col)
     )
     :effect (and
-      (not (bloquejat ?pas ?col))
       (obert ?pas)
+      (not (bloquejat ?pas ?col))
       (not (te-clau ?c))
     )
   )
