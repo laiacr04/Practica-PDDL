@@ -11,31 +11,31 @@
   (:init
     (grimmy-a loc-1-2)
 
-    ;; Connexions amb simetria FALTAN LOS SIMETRICOS
-    (connectat loc-1-2 loc-2-2 c1222) (connectat loc-2-2 loc-1-2 c2122)
-    (connectat loc-2-1 loc-2-2 c2122) (connectat loc-2-2 loc-2-1 c2122)
-    (connectat loc-2-1 loc-3-1 c2131) (connectat loc-3-1 loc-2-1 c2131)
-    (connectat loc-2-1 loc-3-2 c2132) (connectat loc-3-2 loc-2-1 c2132)
-    (connectat loc-2-2 loc-2-3 c2223) (connectat loc-2-3 loc-2-2 c2223)
-    (connectat loc-2-2 loc-3-3 c2233) (connectat loc-3-3 loc-2-2 c2233)
-    (connectat loc-2-3 loc-3-3 c2333) (connectat loc-3-3 loc-2-3 c2333) 
+    ;Connexions 
+    (connectat loc-1-2 loc-2-2 c1222) 
+    (connectat loc-2-1 loc-2-2 c2122) 
+    (connectat loc-2-1 loc-3-1 c2131) 
+    (connectat loc-2-1 loc-3-2 c2132)
+    (connectat loc-2-2 loc-2-3 c2223) 
+    (connectat loc-2-2 loc-3-3 c2233) 
+    (connectat loc-2-3 loc-3-3 c2333)  
     (connectat loc-2-3 loc-3-2 c2332)
-    (connectat loc-3-1 loc-3-2 c3132) (connectat loc-3-2 loc-3-1 c2333)
-    (connectat loc-3-1 loc-4-1 c3141) (connectat loc-4-1 loc-3-1 c3233)
-    (connectat loc-3-2 loc-3-3 c3233) (connectat loc-3-3 loc-3-2 c3242)
+    (connectat loc-3-1 loc-3-2 c3132) 
+    (connectat loc-3-1 loc-4-1 c3141) 
+    (connectat loc-3-2 loc-3-3 c3233) 
     (connectat loc-3-2 loc-4-1 c3241)
     (connectat loc-3-2 loc-4-2 c3242)
     (connectat loc-3-2 loc-4-3 c3243)
-    (connectat loc-3-3 loc-4-3 c3343) (connectat loc-4-3 loc-3-3 c3343)
+    (connectat loc-3-3 loc-4-3 c3343) 
     (connectat loc-4-1 loc-4-2 c4142)
-    (connectat loc-4-2 loc-4-3 c4243) (connectat loc-4-3 loc-4-2 c4243)
+    (connectat loc-4-2 loc-4-3 c4243) 
     (connectat loc-4-2 loc-5-2 c4252)
-    (connectat loc-5-2 loc-5-3 c5253) (connectat loc-5-3 loc-5-2 c4344)
+    (connectat loc-5-2 loc-5-3 c5253)
     (connectat loc-5-3 loc-5-4 c5354)
     (connectat loc-5-4 loc-4-4 c5444)
     (connectat loc-4-4 loc-3-4 c4434)
 
-    ;; Claus i ubicació FET
+    ;Claus i ubicació
     (clau-a clau1 loc-1-2)
     (clau-a clau2 loc-3-2)
     (clau-a clau3 loc-3-2)
@@ -50,14 +50,14 @@
     (color-clau clau5 porpra)
     (color-clau clau6 arc_de_sant_marti)
 
-    ;; Passadissos bloquejats FALTA ESTO
+    ;Passadissos bloquejats FALTA ESTO
     (bloquejat c2132 vermell)
     (bloquejat c2232 vermell)
     (bloquejat c2332 vermell)
     (bloquejat c3132 vermell)
     (bloquejat c3233 vermell)
 
-    ;; Passadissos oberts (els no bloquejats) FALTA ESTO
+    ;Passadissos oberts FALTA ESTO
     (obert c1222)
     (obert c2122)
     (obert c2223)
