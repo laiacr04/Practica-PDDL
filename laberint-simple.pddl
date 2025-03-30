@@ -22,7 +22,10 @@
     :parameters (?des_de ?fins_a - ubicacio ?pas - passadis)
     :precondition (and
       (grimmy-a ?des_de)
-      (connectat ?des_de ?fins_a ?pas)
+      (or 
+        (connectat ?loc ?dest ?pas)   ; Direcció directa
+        (connectat ?dest ?loc ?pas)   ; Direcció inversa
+      )
       (obert ?pas)
     )
     :effect (and
@@ -85,18 +88,4 @@
     )
   )
 
-  ;; Acció per moure's també en sentit invers si hi ha connexió
-  (:action moure-invers
-    :parameters (?des_de ?fins_a - ubicacio ?pas - passadis)
-    :precondition (and
-      (grimmy-a ?des_de)
-      (connectat ?fins_a ?des_de ?pas)
-      (obert ?pas)
-    )
-    :effect (and
-      (not (grimmy-a ?des_de))
-      (grimmy-a ?fins_a)
-    )
-  )
-)
-
+  
