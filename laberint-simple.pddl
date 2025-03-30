@@ -23,8 +23,8 @@
     :precondition (and
       (grimmy-a ?des_de)
       (or 
-        (connectat ?loc ?dest ?pas)   ; Direcció directa
-        (connectat ?dest ?loc ?pas)   ; Direcció inversa
+        (connectat ?des_de ?fins_a ?pas)   ; Direcció directa
+        (connectat ?fins_a ?des_de ?pas)   ; Direcció inversa
       )
       (obert ?pas)
     )
