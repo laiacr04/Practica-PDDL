@@ -12,17 +12,17 @@
     (grimmy-a loc-2-1)
 
     ;; Connexions amb simetria
-    (connectat loc-2-3 loc-1-3 c1323) (connectat loc-1-3 loc-2-3 c1323)
-    (connectat loc-2-1 loc-2-2 c2122) (connectat loc-2-2 loc-2-1 c2122)
-    (connectat loc-2-2 loc-2-3 c2223) (connectat loc-2-3 loc-2-2 c2223)
-    (connectat loc-2-3 loc-2-4 c2324) (connectat loc-2-4 loc-2-3 c2324)
-    (connectat loc-2-2 loc-3-2 c2232) (connectat loc-3-2 loc-2-2 c2232)
-    (connectat loc-3-3 loc-2-3 c2333) (connectat loc-2-3 loc-3-3 c2333)
-    (connectat loc-3-2 loc-3-3 c3233) (connectat loc-3-3 loc-3-2 c3233)
-    (connectat loc-3-2 loc-4-2 c3242) (connectat loc-4-2 loc-3-2 c3242)
-    (connectat loc-4-3 loc-3-3 c3343) (connectat loc-3-3 loc-4-3 c3343)
-    (connectat loc-4-2 loc-4-3 c4243) (connectat loc-4-3 loc-4-2 c4243)
-    (connectat loc-4-3 loc-4-4 c4344) (connectat loc-4-4 loc-4-3 c4344)
+    (connectat loc-2-3 loc-1-3 c1323) ;(connectat loc-1-3 loc-2-3 c1323)
+    (connectat loc-2-1 loc-2-2 c2122) ;(connectat loc-2-2 loc-2-1 c2122)
+    (connectat loc-2-2 loc-2-3 c2223) ;(connectat loc-2-3 loc-2-2 c2223)
+    (connectat loc-2-3 loc-2-4 c2324) ;(connectat loc-2-4 loc-2-3 c2324)
+    (connectat loc-2-2 loc-3-2 c2232) ;(connectat loc-3-2 loc-2-2 c2232)
+    (connectat loc-3-3 loc-2-3 c2333) ;(connectat loc-2-3 loc-3-3 c2333)
+    (connectat loc-3-2 loc-3-3 c3233) ;(connectat loc-3-3 loc-3-2 c3233)
+    (connectat loc-3-2 loc-4-2 c3242) ;(connectat loc-4-2 loc-3-2 c3242)
+    (connectat loc-4-3 loc-3-3 c3343) ;(connectat loc-3-3 loc-4-3 c3343)
+    (connectat loc-4-2 loc-4-3 c4243) ;(connectat loc-4-3 loc-4-2 c4243)
+    (connectat loc-4-3 loc-4-4 c4344) ;(connectat loc-4-4 loc-4-3 c4344)
 
     ;; Claus i ubicació
     (clau-a clau1 loc-2-2)
