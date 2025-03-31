@@ -5,7 +5,7 @@
     :conditional-effects
   )
   (:types
-    ubicacio color clau passadis - object
+    ubicacio color clau passadis number - object
   )
 
   (:predicates
