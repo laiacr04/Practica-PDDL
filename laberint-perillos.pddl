@@ -19,7 +19,7 @@
     (perillos ?p - passadis)
     (ensorrat ?p - passadis)
     (info-clau ?c - clau ?col - color)
-    (clau-un-uso ?c - clau)
+    (clau-un-us ?c - clau) ;TENGO Q COMNIAR LOS PREDICAD0S PARA Q SEA SOLO 1
     (clau-dos-usos ?c - clau)
     (clau-multi-usos ?c - clau)
   )
