@@ -30,6 +30,7 @@
     (clau-a clau3 loc-2-4)
     (clau-a clau4 loc-4-4)
 
+    ; Color de les claus
     (color-clau clau1 vermell)
     (color-clau clau2 groc)
     (color-clau clau3 arc_de_sant_marti)

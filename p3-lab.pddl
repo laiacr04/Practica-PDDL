@@ -43,6 +43,8 @@
     (clau-a clau5 loc-3-2)
     (clau-a clau6 loc-4-4)
 
+
+    ; Color de les claus
     (color-clau clau1 vermell)
     (color-clau clau2 verd)
     (color-clau clau3 verd)
@@ -50,20 +52,33 @@
     (color-clau clau5 porpra)
     (color-clau clau6 arc_de_sant_marti)
 
-    ;Passadissos bloquejats FALTA ESTO
+    ;Passadissos bloquejats 
     (bloquejat c2132 vermell)
     (bloquejat c2232 vermell)
     (bloquejat c2332 vermell)
     (bloquejat c3132 vermell)
     (bloquejat c3233 vermell)
+    (bloquejat c3241 vermell)
+    (bloquejat c3242 vermell)
+    (bloquejat c3243 vermell)
 
-    ;Passadissos oberts FALTA ESTO
+    (bloquejat c4252 porpra)
+    (bloquejat c5253 verd)
+    (bloquejat c5354 porpra)
+    (bloquejat c5444 verd)
+
+    (bloquejat c4434 arc_de_sant_marti)
+
+    ;Passadissos oberts  
     (obert c1222)
     (obert c2122)
     (obert c2223)
+    (obert c2131)
     (obert c2333)
-    (obert c3233)
+    (obert c3141)
     (obert c3343)
+    (obert c4142)
+    (obert c4243)
   )
 
   (:goal 

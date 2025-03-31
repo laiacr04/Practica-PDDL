@@ -32,6 +32,12 @@
     (clau-a clau3 loc-2-2)
     (clau-a clau4 loc-3-2)
 
+    ; Colors de les claus
+    (color-clau clau1 verd)
+    (color-clau clau2 arc_de_sant_marti)
+    (color-clau clau3 porpra)
+    (color-clau clau4 groc)
+
     ; Passadissos bloquejats amb panys de colors 
     (bloquejat c1222 porpra) 
     (bloquejat c2122 groc)  
@@ -39,16 +45,11 @@
     (bloquejat c2232 verd)
     (bloquejat c2324 arc_de_sant_marti)
 
-    ; Colors de les claus
-    (color-clau clau1 verd)
-    (color-clau clau2 arc_de_sant_marti)
-    (color-clau clau3 porpra)
-    (color-clau clau4 groc)
-
+   
   )
   (:goal
     (and
-      (grimmy-a loc-3-2) 
+      (grimmy-a loc-2-4) 
     )
   )
 

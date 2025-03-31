@@ -33,6 +33,7 @@
       (grimmy-a ?fins_a)
     )
   )
+
 (:action recollir
   :parameters (?h - ubicacio ?c - clau)
   :precondition (and
@@ -84,7 +85,7 @@
     :effect (and
       (obert ?pas)
       (not (bloquejat ?pas ?col))
-      (not (te-clau ?c))
+      ;;;(not (te-clau ?c)) COMENTANT AQUESTA LINIA ES PERMET QUE UTILITZI UNA CLAU MÚLTIPLES VEGADES
     )
   )
 )
