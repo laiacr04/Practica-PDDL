@@ -59,11 +59,11 @@
     :parameters (?loc - ubicacio ?c - clau)
     :precondition (and
       (grimmy-a ?loc)
-      (te-clau ?c))
+      (te-clau ?c)
     )
     :effect (and
       (not (te-clau ?c))
-      (clau-a ?c ?loc))
+      (clau-a ?c ?loc)
     )
   )
 
