@@ -4,8 +4,9 @@
     :negative-preconditions
     :conditional-effects
   )
+
   (:types
-    ubicacio color clau passadis number - object
+    ubicacio color clau passadis - object
   )
 
   (:predicates
@@ -17,7 +18,10 @@
     (clau-a ?c - clau ?h - ubicacio)
     (perillos ?p - passadis)
     (ensorrat ?p - passadis)
-    (info-clau ?c - clau ?col - color ?usos - number)  ; Unificat color i tipus de la clau
+    (info-clau ?c - clau ?col - color)
+    (clau-un-uso ?c - clau)
+    (clau-dos-usos ?c - clau)
+    (clau-multi-usos ?c - clau)
   )
 
   (:action moure
@@ -25,16 +29,15 @@
     :precondition (and
       (grimmy-a ?des_de)
       (or 
-        (connectat ?des_de ?fins_a ?pas)   ; Direcció directa
-        (connectat ?fins_a ?des_de ?pas)   ; Direcció inversa
+        (connectat ?des_de ?fins_a ?pas)
+        (connectat ?fins_a ?des_de ?pas)
       )
       (obert ?pas)
-      (not (ensorrat ?pas))  ; El passadís no ha d'estar col·lapsat prèviament
+      (not (ensorrat ?pas))
     )
     :effect (and
       (not (grimmy-a ?des_de))
       (grimmy-a ?fins_a)
-      ;; Si el passadís és perillós, col·lapsa'l després de passar per ell
       (when (perillos ?pas) (ensorrat ?pas))
     )
   )
@@ -44,7 +47,7 @@
     :precondition (and
       (grimmy-a ?loc)
       (clau-a ?c ?loc)
-      (not (exists (?k - clau) (te-clau ?k)))  ; Grimmy no porta cap clau
+      (not (exists (?k - clau) (te-clau ?k)))
     )
     :effect (and
       (te-clau ?c)
@@ -56,11 +59,11 @@
     :parameters (?loc - ubicacio ?c - clau)
     :precondition (and
       (grimmy-a ?loc)
-      (te-clau ?c)
+      (te-clau ?c))
     )
     :effect (and
       (not (te-clau ?c))
-      (clau-a ?c ?loc)
+      (clau-a ?c ?loc))
     )
   )
 
@@ -71,16 +74,20 @@
       (connectat ?loc ?dest ?pas)
       (bloquejat ?pas ?col)
       (te-clau ?c)
-      (info-clau ?c ?col ?usos)  ; Obtenim el color i el nombre d'usos restants de la clau
+      (info-clau ?c ?col)
       (not (ensorrat ?pas))
-      (>= ?usos 1)  ; La clau encara té usos disponibles
+      (or (clau-un-uso ?c) (clau-dos-usos ?c) (clau-multi-usos ?c))
     )
     :effect (and
       (not (bloquejat ?pas ?col))
       (obert ?pas)
-      (not (te-clau ?c))  ; Grimmy deixa la clau després de desbloquejar
-      ;; Reduïm els usos restants de la clau després de desbloquejar
-      (info-clau ?c ?col (- ?usos 1))  ; Reduïm el nombre d'usos de la clau
+      (when (clau-dos-usos ?c) 
+        (and 
+          (not (clau-dos-usos ?c))
+          (clau-un-uso ?c)))
+      (when (clau-un-uso ?c) 
+        (not (clau-un-uso ?c)))
+      (not (te-clau ?c))
     )
   )
 )
