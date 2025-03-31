@@ -25,11 +25,8 @@
     (connectat loc-4-3 loc-4-4 c4344)
 
     ;; Passadissos perillosos (amb pany vermell)
-    (perillos c1323)
-    (perillos c2324)
     (perillos c3242)
     (perillos c4243)
-    (perillos c4344)
 
     ;; Ubicació de les claus
     (clau-a clau1 loc-2-2)
@@ -44,16 +41,11 @@
     (bloquejat c4243 vermell)
     (bloquejat c4344 groc)
 
-    ;; Tipus de clau
-    (info-clau clau1 vermell un_us)
-    (info-clau clau2 groc dos_usos)
-    (info-clau clau3 arc_de_sant_marti un_us)
-    (info-clau clau4 porpra multius)
-
-    ;; Usos restants de les claus
-    (usos-restants clau2 2)
-    (usos-restants clau3 1)
-    (usos-restants clau4 99)  ; La clau vermella té us infinit
+    ;; Tipus de clau i usos restants
+    (info-clau clau1 vermell 99) 
+    (info-clau clau2 groc 2)     ;; 2 usos
+    (info-clau clau3 arc_de_sant_marti 1)  ;; 1 ús
+    (info-clau clau4 porpra 1)  
   )
 
   (:goal
@@ -62,4 +54,3 @@
     )
   )
 )
-
