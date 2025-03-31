@@ -1,4 +1,4 @@
-(define (problem p3-lab)
+(define (problem p3-sim)
   (:domain laberint-simple)
 
   (:objects ;FET

@@ -1,4 +1,4 @@
-(define (problem p1-lab)
+(define (problem p1-sim)
   (:domain laberint-simple)
 
   (:objects

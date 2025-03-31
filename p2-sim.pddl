@@ -1,4 +1,4 @@
-(define (problem p2-lab)
+(define (problem p2-sim)
   (:domain laberint-simple)
 
   ; Convencio de nomenclatura:
