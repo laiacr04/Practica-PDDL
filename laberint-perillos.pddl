@@ -4,110 +4,52 @@
     :negative-preconditions
     :conditional-effects
   )
-  
   (:types
-    ubicacio color clau passadis - object
-    tipus_clau - object  ; Tipos de claves
+    ubicacio color clau passadis tipus_clau - object
   )
 
   (:predicates
-    ;; Estado del laberinto
     (grimmy-a ?loc - ubicacio)
     (connectat ?h1 ?h2 - ubicacio ?pas - passadis)
     (bloquejat ?pas - passadis ?col - color)
     (obert ?pas - passadis)
-    (col-lapsat ?pas - passadis)  ; Pasillo derrumbado
-
-    ;; Gestión de claves
     (te-clau ?c - clau)
     (clau-a ?c - clau ?h - ubicacio)
-    (color-clau ?c - clau ?col - color)
-    (tipus-clau ?c - clau ?t - tipus_clau)  ; un_ús/dos_usos/infinit
-    (usos-restants ?c - clau ?n - int)
-
-    ;; Tesoro
-    (tesoro-a ?h - ubicacio)
-    (tesoro-trobat)
-
-    ;; Predicados para tipos de clave (sustituyen a las constantes)
-    (es_un_us ?t - tipus_clau)
-    (es_dos_usos ?t - tipus_clau)
-    (es_infinit ?t - tipus_clau)
-    (es_vermell ?c - color)  ; Para pasillos peligrosos
+    (tipus-clau ?c - clau ?t - tipus_clau)  ; Fusionem els predicats de tipus de clau
+    (usos-restants ?c - clau ?n - number)
+    (perillos ?p - passadis)
+    (ensorrat ?p - passadis)
   )
-
-  ;; ---- ACCIONES ----
 
   (:action moure
-    :parameters (?from ?to - ubicacio ?pas - passadis ?col - color)
+    :parameters (?des_de ?fins_a - ubicacio ?pas - passadis)
     :precondition (and
-      (grimmy-a ?from)
+      (grimmy-a ?des_de)
       (or 
-        (connectat ?from ?to ?pas)
-        (connectat ?to ?from ?pas)
+        (connectat ?des_de ?fins_a ?pas)   ; Direcció directa
+        (connectat ?fins_a ?des_de ?pas)   ; Direcció inversa
       )
       (obert ?pas)
-      (not (col-lapsat ?pas))
+      (not (ensorrat ?pas))  ; El passadís no ha d'estar col·lapsat prèviament
     )
     :effect (and
-      (not (grimmy-a ?from))
-      (grimmy-a ?to)
-      (when (and (bloquejat ?pas ?col) (es_vermell ?col))
-        (col-lapsat ?pas)
-      )
-      (when (tesoro-a ?to)
-        (tesoro-trobat)
-      )
-    )
-  )
-
-  (:action desbloquejar
-    :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio ?t - tipus_clau)
-    :precondition (and
-      (grimmy-a ?loc)
-      (or 
-        (connectat ?loc ?dest ?pas)
-        (connectat ?dest ?loc ?pas)
-      )
-      (bloquejat ?pas ?col)
-      (te-clau ?c)
-      (color-clau ?c ?col)
-      (tipus-clau ?c ?t)
-      (or
-        (es_infinit ?t)
-        (and (es_dos_usos ?t) (usos-restants ?c 2))
-        (and (es_un_us ?t) (usos-restants ?c 1))
-      )
-    )
-    :effect (and
-      (obert ?pas)
-      (not (bloquejat ?pas ?col))
-      (when (es_dos_usos ?t)
-        (decrease (usos-restants ?c) 1)
-        (when (usos-restants ?c 1)
-          (not (tipus-clau ?c ?t))
-          (tipus-clau ?c un_ús)  ; Convertimos a un_ús
-        )
-      )
-      (when (es_un_us ?t)
-        (not (te-clau ?c))
-      )
+      (not (grimmy-a ?des_de))
+      (grimmy-a ?fins_a)
+      ;; Si el passadís és perillós, col·lapsa'l després de passar per ell
+      (when (perillos ?pas) (ensorrat ?pas))
     )
   )
 
   (:action recollir
-    :parameters (?h - ubicacio ?c - clau ?t - tipus_clau)
+    :parameters (?loc - ubicacio ?c - clau)
     :precondition (and
-      (grimmy-a ?h)
-      (clau-a ?c ?h)
-      (forall (?k - clau) (not (te-clau ?k)))
-      (tipus-clau ?c ?t)
+      (grimmy-a ?loc)
+      (clau-a ?c ?loc)
+      (not (exists (?k - clau) (te-clau ?k)))  ; Grimmy no porta cap clau
     )
     :effect (and
       (te-clau ?c)
-      (not (clau-a ?c ?h))
-      (when (es_dos_usos ?t) (usos-restants ?c 2))
-      (when (es_un_us ?t) (usos-restants ?c 1))
+      (not (clau-a ?c ?loc))
     )
   )
 
@@ -120,6 +62,33 @@
     :effect (and
       (not (te-clau ?c))
       (clau-a ?c ?loc)
+    )
+  )
+
+  (:action desbloquejar
+    :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
+    :precondition (and
+      (grimmy-a ?loc)
+      (connectat ?loc ?dest ?pas)
+      (bloquejat ?pas ?col)
+      (te-clau ?c)
+      (tipus-clau ?c ?t)  ; Tipus de clau (un_us, dos_usos, multius)
+      (not (ensorrat ?pas))
+      (usos-restants ?c ?n)  ; Hi ha un nombre d'usos restants
+      (>= ?n 1)  ; La clau encara té usos disponibles
+    )
+    :effect (and
+      (not (bloquejat ?pas ?col))
+      (obert ?pas)
+      (not (te-clau ?c))  ; Grimmy deixa la clau després de desbloquejar
+      (when (eq ?t un_us) (not (te-clau ?c)))  ; Si és una clau d'un sol ús, la deixa
+      (when (eq ?t dos_usos)
+        (and
+          (not (te-clau ?c))
+          ;; Reduïm el nombre d'usos restants de la clau de dos usos
+          (usos-restants ?c (- ?n 1))
+        )
+      )
     )
   )
 )
