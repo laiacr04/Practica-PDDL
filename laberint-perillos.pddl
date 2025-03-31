@@ -5,7 +5,7 @@
     :conditional-effects
   )
   (:types
-    ubicacio color clau passadis tipus_clau - object
+    ubicacio color clau passadis - object
   )
 
   (:predicates
@@ -15,10 +15,9 @@
     (obert ?pas - passadis)
     (te-clau ?c - clau)
     (clau-a ?c - clau ?h - ubicacio)
-    (usos-restants ?c - clau ?n - number)
     (perillos ?p - passadis)
     (ensorrat ?p - passadis)
-    (info-clau ?c - clau ?col - color ?t - tipus_clau)  ; Unificat color i tipus de la clau
+    (info-clau ?c - clau ?col - color ?usos - number)  ; Unificat color i tipus de la clau
   )
 
   (:action moure
@@ -72,23 +71,16 @@
       (connectat ?loc ?dest ?pas)
       (bloquejat ?pas ?col)
       (te-clau ?c)
-      (info-clau ?c ?col ?t)  ; Tipus de clau (un_us, dos_usos, multius)
+      (info-clau ?c ?col ?usos)  ; Obtenim el color i el nombre d'usos restants de la clau
       (not (ensorrat ?pas))
-      (usos-restants ?c ?n)  ; Hi ha un nombre d'usos restants
-      (>= ?n 1)  ; La clau encara té usos disponibles
+      (>= ?usos 1)  ; La clau encara té usos disponibles
     )
     :effect (and
       (not (bloquejat ?pas ?col))
       (obert ?pas)
       (not (te-clau ?c))  ; Grimmy deixa la clau després de desbloquejar
-      (when (eq ?t un_us) (not (te-clau ?c)))  ; Si és una clau d'un sol ús, la deixa
-      (when (eq ?t dos_usos)
-        (and
-          (not (te-clau ?c))
-          ;; Reduïm el nombre d'usos restants de la clau de dos usos
-          (usos-restants ?c (- ?n 1))
-        )
-      )
+      ;; Reduïm els usos restants de la clau després de desbloquejar
+      (info-clau ?c ?col (- ?usos 1))  ; Reduïm el nombre d'usos de la clau
     )
   )
 )
