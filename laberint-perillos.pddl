@@ -15,10 +15,10 @@
     (obert ?pas - passadis)
     (te-clau ?c - clau)
     (clau-a ?c - clau ?h - ubicacio)
-    (tipus-clau ?c - clau ?t - tipus_clau)  ; Fusionem els predicats de tipus de clau
     (usos-restants ?c - clau ?n - number)
     (perillos ?p - passadis)
     (ensorrat ?p - passadis)
+    (info-clau ?c - clau ?col - color ?t - tipus_clau)  ; Unificat color i tipus de la clau
   )
 
   (:action moure
@@ -72,7 +72,7 @@
       (connectat ?loc ?dest ?pas)
       (bloquejat ?pas ?col)
       (te-clau ?c)
-      (tipus-clau ?c ?t)  ; Tipus de clau (un_us, dos_usos, multius)
+      (info-clau ?c ?col ?t)  ; Tipus de clau (un_us, dos_usos, multius)
       (not (ensorrat ?pas))
       (usos-restants ?c ?n)  ; Hi ha un nombre d'usos restants
       (>= ?n 1)  ; La clau encara té usos disponibles
