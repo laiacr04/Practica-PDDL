@@ -24,9 +24,17 @@
     (connectat loc-4-2 loc-4-3 c4243)
     (connectat loc-4-3 loc-4-4 c4344)
 
-    ;; Passadissos perillosos
+    ;; Passadissos perillosos (que s'ensorren)
     (perillos c3242)
     (perillos c4243)
+
+    ;; Passadissos oberts inicialment
+    (obert c2122)
+    (obert c2223)
+    (obert c2232)
+    (obert c2333)
+    (obert c3233)
+    (obert c3343)
 
     ;; Ubicació claus
     (clau-a clau1 loc-2-2)
@@ -34,24 +42,24 @@
     (clau-a clau3 loc-2-4)
     (clau-a clau4 loc-4-4)
 
+    ;; Tipus de claus
+    (clau-multi-usos clau1)  ; Vermella (usos infinits)
+    (clau-dos-usos clau2)    ; Groga (2 usos)
+    (clau-un-us clau3)       ; Arc de Sant Martí (1 ús)
+    (clau-un-us clau4)       ; Porpra (1 ús)
+
+    ;; Colors de les claus
+    (color-clau clau1 vermell)
+    (color-clau clau2 groc)
+    (color-clau clau3 arc_de_sant_marti)
+    (color-clau clau4 porpra)
+
     ;; Passadissos bloquejats
     (bloquejat c1323 arc_de_sant_marti)
     (bloquejat c2324 porpra)
     (bloquejat c3242 vermell)
     (bloquejat c4243 vermell)
     (bloquejat c4344 groc)
-
-    ;; Info claus
-    (info-clau clau1 vermell)
-    (info-clau clau2 groc)
-    (info-clau clau3 arc_de_sant_marti)
-    (info-clau clau4 porpra)
-
-    ;; Usos claus
-    (clau-multi-usos clau1)  ; Para la clau con "99 usos" (tratada como ilimitada)
-    (clau-dos-usos clau2)
-    (clau-un-uso clau3)
-    (clau-un-uso clau4)
   )
 
   (:goal
