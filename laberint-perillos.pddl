@@ -78,28 +78,28 @@
   )
 
   (:action desbloquejar
-    :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
-    :precondition (and
-      (grimmy-a ?loc)
-      (or 
-        (connectat ?loc ?dest ?pas)
-        (connectat ?dest ?loc ?pas)
-      )
-      (bloquejat ?pas ?col)
-      (te-clau ?c)
-      (color-clau ?c ?col)
-      (not (ensorrat ?pas))
-      (or (clau-un-us ?c) (clau-dos-usos ?c) (clau-multi-usos ?c))
-    )
-    :effect (and
-      (obert ?pas)
-      (not (bloquejat ?pas ?col))
-      (when (clau-dos-usos ?c) 
-        (and 
-          (not (clau-dos-usos ?c))
-          (clau-un-us ?c)))
-      (when (clau-un-us ?c) 
-        (not (te-clau ?c)))
-    )
+  :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
+  :precondition (and
+    (grimmy-a ?loc)
+    (or (connectat ?loc ?dest ?pas) (connectat ?dest ?loc ?pas))
+    (bloquejat ?pas ?col)
+    (te-clau ?c)
+    (color-clau ?c ?col)
+    (not (ensorrat ?pas))
+    (or (clau-un-us ?c) (clau-dos-usos ?c) (clau-multi-usos ?c))
   )
+  :effect (and
+    (obert ?pas)
+    (not (bloquejat ?pas ?col))
+    ;; Manejo explícito de todos los tipos de claves:
+    (when (clau-multi-usos ?c)
+      (not (bloquejat ?pas ?col)))  ; Solo desbloquea, no modifica la clave
+    (when (clau-dos-usos ?c)
+      (and 
+        (not (clau-dos-usos ?c))
+        (clau-un-us ?c)))
+    (when (and (clau-un-us ?c) (not (clau-multi-usos ?c)))
+      (not (te-clau ?c)))
+  )
+)
 ) 
