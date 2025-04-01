@@ -102,4 +102,4 @@
         (not (te-clau ?c)))
     )
   )
-) y tambien se me queda dando vueltas...
+) 
