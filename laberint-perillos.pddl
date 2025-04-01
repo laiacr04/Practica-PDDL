@@ -58,14 +58,17 @@
   )
 
   (:action deixar
-    :parameters (?loc - ubicacio ?c - clau)
-    :precondition (and
-      (grimmy-a ?loc)
-      (te-clau ?c)
-    )
-    :effect (and
-      (not (te-clau ?c))
-      (clau-a ?c ?loc)
+  :parameters (?loc - ubicacio ?c - clau)
+  :precondition (and
+    (grimmy-a ?loc)
+    (te-clau ?c)
+    ;; només pot deixar la clau si NO hi ha cap passadís adjacent bloquejat amb el seu color
+    (forall (?dest - ubicacio ?pas - passadis ?col - color)
+      (or
+        (not (connectat ?loc ?dest ?pas))
+        (not (bloquejat ?pas ?col))
+        (not (color-clau ?c ?col))
+      )
     )
   )
 
