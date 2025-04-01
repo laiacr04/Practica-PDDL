@@ -28,19 +28,15 @@
     :parameters (?des_de ?fins_a - ubicacio ?pas - passadis)
     :precondition (and
       (grimmy-a ?des_de)
-      (or 
-        (connectat ?des_de ?fins_a ?pas)
-        (connectat ?fins_a ?des_de ?pas)
-      )
+      (or (connectat ?des_de ?fins_a ?pas)
+          (connectat ?fins_a ?des_de ?pas))
       (obert ?pas)
       (not (ensorrat ?pas))
-    )
     :effect (and
       (not (grimmy-a ?des_de))
       (grimmy-a ?fins_a)
       (when (perillos ?pas)
-        (ensorrat ?pas)
-      )
+        (ensorrat ?pas))
     )
   )
 
@@ -49,46 +45,54 @@
     :precondition (and
       (grimmy-a ?loc)
       (clau-a ?c ?loc)
-      (not (exists (?k - clau) (te-clau ?k)))
-    )
+      (not (exists (?k - clau) (te-clau ?k))))
     :effect (and
       (te-clau ?c)
-      (not (clau-a ?c ?loc))
+      (not (clau-a ?c ?loc)))
     )
   )
 
   (:action deixar
-  :parameters (?loc - ubicacio ?c - clau)
-  :precondition (and
-    (grimmy-a ?loc)
-    (te-clau ?c)
-    ;; Solo permite dejar la clave si:
-    ;; 1 No hay pasillos adyacentes bloqueados con su color O
-    ;; 2 La clave ya no tiene usos restantes
-    (or
-      (not (exists (?pas - passadis ?col - color ?dest - ubicacio)
-            (and
-              (connectat ?loc ?dest ?pas)
-              (bloquejat ?pas ?col)
-              (color-clau ?c ?col)
-              (not (ensorrat ?pas))
-              (or (clau-un-us ?c) (clau-dos-usos ?c) (clau-multi-usos ?c))
-            )
-          ))
-      (not (or (clau-un-us ?c) (clau-dos-usos ?c) (clau-multi-usos ?c)))
+    :parameters (?loc - ubicacio ?c - clau)
+    :precondition (and
+      (grimmy-a ?loc)
+      (te-clau ?c)
+      (forall (?dest - ubicacio ?pas - passadis ?col - color)
+        (or (not (connectat ?loc ?dest ?pas))
+            (not (bloquejat ?pas ?col))
+            (not (color-clau ?c ?col))
+            (not (or (clau-un-us ?c) 
+                     (clau-dos-usos ?c)
+                     (clau-multi-usos ?c))))))
+    :effect (and
+      (not (te-clau ?c))
+      (clau-a ?c ?loc))
     )
   )
-  :effect (and
-    (not (te-clau ?c))
-    (clau-a ?c ?loc)
-    ;; Efecto adicional: Marcar como "ya revisado" para evitar bucles
-    (forall (?pas - passadis ?col - color ?dest - ubicacio)
-      (when (and (connectat ?loc ?dest ?pas)
-                 (bloquejat ?pas ?col)
-                 (color-clau ?c ?col))
-        (not (bloquejat ?pas ?col))  ; Fuerza el desbloqueo implícito
-      )
+
+  (:action desbloquejar
+    :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
+    :precondition (and
+      (grimmy-a ?loc)
+      (or (connectat ?loc ?dest ?pas)
+          (connectat ?dest ?loc ?pas))
+      (bloquejat ?pas ?col)
+      (te-clau ?c)
+      (color-clau ?c ?col)
+      (not (ensorrat ?pas))
+      (or (clau-un-us ?c) 
+          (clau-dos-usos ?c) 
+          (clau-multi-usos ?c)))
+    :effect (and
+      (obert ?pas)
+      (not (bloquejat ?pas ?col))
+      (when (and (clau-dos-usos ?c) 
+                 (not (clau-un-us ?c)))
+        (and (not (clau-dos-usos ?c))
+             (clau-un-us ?c)))
+      (when (clau-un-us ?c)
+        (not (te-clau ?c)))
+      ;; No consumir clau-multi-usos
     )
   )
-)
 )
