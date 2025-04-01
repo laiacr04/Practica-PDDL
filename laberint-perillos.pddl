@@ -32,6 +32,7 @@
           (connectat ?fins_a ?des_de ?pas))
       (obert ?pas)
       (not (ensorrat ?pas))
+      )
     :effect (and
       (not (grimmy-a ?des_de))
       (grimmy-a ?fins_a)
