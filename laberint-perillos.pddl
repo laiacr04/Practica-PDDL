@@ -83,8 +83,8 @@
     (grimmy-a ?loc)
     (te-clau ?c)
     ;; Solo permite dejar la clave si:
-    ;; 1) No hay pasillos adyacentes bloqueados con su color O
-    ;; 2) La clave ya no tiene usos restantes
+    ;; 1 No hay pasillos adyacentes bloqueados con su color O
+    ;; 2 La clave ya no tiene usos restantes
     (or
       (not (exists (?pas - passadis ?col - color ?dest - ubicacio)
             (and
