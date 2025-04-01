@@ -71,6 +71,11 @@
       )
     )
   )
+  :effect (and
+      (not (te-clau ?c))
+      (clau-a ?c ?loc)
+    )
+  )
 
   (:action desbloquejar
     :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
