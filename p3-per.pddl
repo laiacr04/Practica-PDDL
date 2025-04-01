@@ -99,6 +99,6 @@
   )
 
   (:goal 
-    (and (grimmy-a loc-3-4))
+    (and (grimmy-a loc-3-2))
   )
 )
