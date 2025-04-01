@@ -19,9 +19,7 @@
     (connectat loc-2-3 loc-2-4 c2324)
     (connectat loc-2-2 loc-3-2 c2232)
 
-    ; Passadissos perillosos (que s'ensorren després d'usar-los)
-    (perillos c2122)  ; Passadís groc que s'ensorrarà després del primer ús
-    (perillos c2223)  ; Passadís groc que s'ensorrarà després del segon ús
+    ; Passadissos perillosos (cap en aquest problema)
 
     ; Ubicació de les claus
     (clau-a clau1 loc-1-2)
