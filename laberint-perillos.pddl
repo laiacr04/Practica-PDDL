@@ -57,25 +57,18 @@
     )
   )
 
-  (:action deixar
+(:action deixar
   :parameters (?loc - ubicacio ?c - clau)
   :precondition (and
     (grimmy-a ?loc)
     (te-clau ?c)
-    ;; només pot deixar la clau si NO hi ha cap passadís adjacent bloquejat amb el seu color
-    (forall (?dest - ubicacio ?pas - passadis ?col - color)
-      (or
-        (not (connectat ?loc ?dest ?pas))
-        (not (bloquejat ?pas ?col))
-        (not (color-clau ?c ?col))
-      )
-    )
+    ;; Eliminar la restricción completa
   )
   :effect (and
-      (not (te-clau ?c))
-      (clau-a ?c ?loc)
-    )
+    (not (te-clau ?c))
+    (clau-a ?c ?loc)
   )
+)
 
   (:action desbloquejar
   :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
@@ -91,15 +84,10 @@
   :effect (and
     (obert ?pas)
     (not (bloquejat ?pas ?col))
-    ;; Manejo explícito de todos los tipos de claves:
-    (when (clau-multi-usos ?c)
-      (not (bloquejat ?pas ?col)))  ; Solo desbloquea, no modifica la clave
-    (when (clau-dos-usos ?c)
-      (and 
-        (not (clau-dos-usos ?c))
-        (clau-un-us ?c)))
-    (when (and (clau-un-us ?c) (not (clau-multi-usos ?c)))
-      (not (te-clau ?c)))
+    ;; Eliminar la pérdida automática de claves
+    (when (clau-un-us ?c)
+      (not (clau-un-us ?c)) ; Solo marcar como usada
   )
 )
-) 
+
+)) 
