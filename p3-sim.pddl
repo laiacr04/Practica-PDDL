@@ -1,7 +1,7 @@
 (define (problem p3-sim)
   (:domain laberint-simple)
 
-  (:objects ;FET
+  (:objects 
     vermell verd porpra arc_de_sant_marti - color
     loc-1-2 loc-2-1 loc-2-2 loc-2-3 loc-3-1 loc-3-2 loc-3-3 loc-3-4 loc-4-1 loc-4-2 loc-4-3 loc-4-4 loc-5-2 loc-5-3 loc-5-4 - ubicacio
     clau1 clau2 clau3 clau4 clau5 clau6 - clau

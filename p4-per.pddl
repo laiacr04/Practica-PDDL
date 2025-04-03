@@ -32,12 +32,12 @@
     (clau-a clau4 loc-2-1)  ; Verd (1 ús)
     (clau-a clau5 loc-2-4)  ; Porpra (1 ús)
 
-    ; Tipus d'usos de les claus
-    (clau-multi-usos clau1)  ; Vermell (usos infinits)
-    (clau-dos-usos clau2)    ; Groc (2 usos)
-    (clau-un-us clau3)       ; Arc de Sant Martí (1 ús)
-    (clau-un-us clau4)       ; Verd (1 ús)
-    (clau-un-us clau5)       ; Porpra (1 ús)
+    ;; Definició dels usos de les claus
+    (= (usos-restants clau1) 1000)  ; Vermell (multiús - efectivament infinit)
+    (= (usos-restants clau2) 2)     ; Groc (2 usos)
+    (= (usos-restants clau3) 1)     ; Arc de Sant Martí (1 ús)
+    (= (usos-restants clau4) 1)     ; Verd (1 ús)
+    (= (usos-restants clau5) 1)     ; Porpra (1 ús)
 
     ; Colors de les claus
     (color-clau clau1 vermell)

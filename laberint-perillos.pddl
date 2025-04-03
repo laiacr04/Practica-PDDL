@@ -2,46 +2,44 @@
   (:requirements
     :typing
     :negative-preconditions
+    :quantified-preconditions
     :conditional-effects
+    :disjunctive-preconditions
+    :numeric-fluents
   )
 
   (:types
-    ubicacio color clau passadis - object
+    ubicacio color clau passadis - object  ; Eliminat tipus-clau que no s'utilitza
   )
 
   (:predicates
     (grimmy-a ?loc - ubicacio)
-    (connectat ?h1 ?h2 - ubicacio ?pas - passadis)
+    (connectat ?loc1 - ubicacio ?loc2 - ubicacio ?pas - passadis)
     (bloquejat ?pas - passadis ?col - color)
-    (obert ?pas - passadis)
+    (obert ?pas - passadis)  ; Afegit predicat que faltava
     (te-clau ?c - clau)
-    (clau-a ?c - clau ?h - ubicacio)
-    (perillos ?p - passadis)
-    (ensorrat ?p - passadis)
+    (clau-a ?c - clau ?loc - ubicacio)
     (color-clau ?c - clau ?col - color)
-    (clau-un-us ?c - clau)
-    (clau-dos-usos ?c - clau)
-    (clau-multi-usos ?c - clau)
+    (perillos ?p - passadis)
+    (collapsat ?p - passadis)
+  )
+
+  (:functions
+    (usos-restants ?c - clau)
   )
 
   (:action moure
-    :parameters (?des_de ?fins_a - ubicacio ?pas - passadis)
+    :parameters (?loc1 ?loc2 - ubicacio ?pas - passadis)
     :precondition (and
-      (grimmy-a ?des_de)
-      (or 
-        (connectat ?des_de ?fins_a ?pas)
-        (connectat ?fins_a ?des_de ?pas)
-      )
-      (obert ?pas)
-      (not (ensorrat ?pas))
-    )
+      (grimmy-a ?loc1)
+      (or (connectat ?loc1 ?loc2 ?pas) (connectat ?loc2 ?loc1 ?pas))
+      (obert ?pas)  ; Canviat de (not (bloquejat)) a (obert) per consistència
+      (not (collapsat ?pas)))
     :effect (and
-      (not (grimmy-a ?des_de))
-      (grimmy-a ?fins_a)
-      (when (perillos ?pas)
-        (ensorrat ?pas)
-      )
-    )
+      (grimmy-a ?loc2)
+      (not (grimmy-a ?loc1))
+      (when (perillos ?pas) 
+        (collapsat ?pas)))
   )
 
   (:action recollir
@@ -49,45 +47,33 @@
     :precondition (and
       (grimmy-a ?loc)
       (clau-a ?c ?loc)
-      (not (exists (?k - clau) (te-clau ?k)))
-    )
+      (not (exists (?k - clau) (te-clau ?k))))
     :effect (and
       (te-clau ?c)
-      (not (clau-a ?c ?loc))
-    )
-  )
-
-(:action deixar
-  :parameters (?loc - ubicacio ?c - clau)
-  :precondition (and
-    (grimmy-a ?loc)
-    (te-clau ?c)
-    ;; Eliminar la restricción completa
-  )
-  :effect (and
-    (not (te-clau ?c))
-    (clau-a ?c ?loc)
-  )
-)
+      (not (clau-a ?c ?loc))))
+  
+  (:action deixar
+    :parameters (?loc - ubicacio ?c - clau)
+    :precondition (and
+      (grimmy-a ?loc)
+      (te-clau ?c))
+    :effect (and
+      (clau-a ?c ?loc)
+      (not (te-clau ?c))))
 
   (:action desbloquejar
-  :parameters (?loc - ubicacio ?pas - passadis ?col - color ?c - clau ?dest - ubicacio)
-  :precondition (and
-    (grimmy-a ?loc)
-    (or (connectat ?loc ?dest ?pas) (connectat ?dest ?loc ?pas))
-    (bloquejat ?pas ?col)
-    (te-clau ?c)
-    (color-clau ?c ?col)
-    (not (ensorrat ?pas))
-    (or (clau-un-us ?c) (clau-dos-usos ?c) (clau-multi-usos ?c))
-  )
-  :effect (and
-    (obert ?pas)
-    (not (bloquejat ?pas ?col))
-    ;; Eliminar la pérdida automática de claves
-    (when (clau-un-us ?c)
-      (not (clau-un-us ?c)) ; Solo marcar como usada
-  )
+    :parameters (?loc1 ?loc2 - ubicacio ?pas - passadis ?col - color ?c - clau)
+    :precondition (and
+      (grimmy-a ?loc1)
+      (or (connectat ?loc1 ?loc2 ?pas) (connectat ?loc2 ?loc1 ?pas))
+      (bloquejat ?pas ?col)
+      (te-clau ?c)
+      (color-clau ?c ?col)
+      (> (usos-restants ?c) 0))
+    :effect (and
+      (obert ?pas)
+      (not (bloquejat ?pas ?col))
+      (assign (usos-restants ?c) (- (usos-restants ?c) 1))
+      (when (= (usos-restants ?c) 0) 
+        (not (te-clau ?c)))))
 )
-
-)) 

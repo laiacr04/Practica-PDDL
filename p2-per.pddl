@@ -1,4 +1,4 @@
-(define (problem p2-perill)
+(define (problem p2-per)
   (:domain laberint-perillos)
 
   (:objects
@@ -19,7 +19,6 @@
     (connectat loc-2-3 loc-2-4 c2324)
     (connectat loc-2-2 loc-3-2 c2232)
 
-    ; Passadissos perillosos (cap en aquest problema)
 
     ; Ubicació de les claus
     (clau-a clau1 loc-1-2)
@@ -27,11 +26,12 @@
     (clau-a clau3 loc-2-2)
     (clau-a clau4 loc-3-2)
 
-    ; Tipus d'usos de les claus
-    (clau-un-us clau1)     ; Verd - 1 ús
-    (clau-un-us clau2)     ; Arc de Sant Martí - 1 ús
-    (clau-un-us clau3)     ; Porpra - 1 ús
-    (clau-dos-usos clau4)  ; Groc - 2 usos
+   ;; Definició dels usos de les claus
+    (= (usos-restants clau1) 1)  ; Verd - 1 ús
+    (= (usos-restants clau2) 1)  ; Arc de Sant Martí - 1 ús
+    (= (usos-restants clau3) 1)  ; Porpra - 1 ús
+    (= (usos-restants clau4) 2)  ; Groc - 2 usos
+
 
     ; Colors de les claus
     (color-clau clau1 verd)
@@ -46,7 +46,6 @@
     (bloquejat c2232 verd)     ; Requereix clau1 (verd)
     (bloquejat c2324 arc_de_sant_marti) ; Requereix clau2 (arc_de_sant_marti)
 
-    ; Passadissos inicialment oberts (cap en aquest problema)
   )
 
   (:goal
