@@ -1,14 +1,18 @@
-java -jar enhsp-20.jar -o laberint-simple.pddl -f p1-sim.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-simple.pddl -f p2-sim.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-simple.pddl -f p3-sim.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-simple.pddl -f p4-sim.pddl -opt blind
+java -jar enhsp-20.jar -o laberint-simple.pddl -f p1-sim.pddl -planner opt-blind
 
-java -jar enhsp-20.jar -o laberint-perillos.pddl -f p1-per.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-perillos.pddl -f p2-per.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-perillos.pddl -f p3-per.pddl -opt blind
-java -jar enhsp-20.jar -o laberint-perillos.pddl -f p4-per.pddl -opt blind
+java -jar enhsp-20.jar -o laberint-simple.pddl -f p2-sim.pddl -planner opt-blind
 
+java -jar enhsp-20.jar -o laberint-simple.pddl -f p3-sim.pddl 
 
+java -jar enhsp-20.jar -o laberint-simple.pddl -f p4-sim.pddl -planner opt-blind
+
+java -jar enhsp-20.jar -o laberint-perillos.pddl -f p1-per.pddl -planner opt-blind
+
+java -jar enhsp-20.jar -o laberint-perillos.pddl -f p2-per.pddl -planner opt-blind
+
+java -jar enhsp-20.jar -o laberint-perillos.pddl -f p3-per.pddl 
+
+java -jar enhsp-20.jar -o laberint-perillos.pddl -f p4-per.pddl -planner opt-blind
 
 
 
