@@ -1,6 +1,7 @@
 (define (problem laberint-problema)
   (:domain laberint-perillos)
-  
+
+  ; Objectes utilitzats en el problema
   (:objects
     vermell verd porpra arc_de_sant_marti - color
     loc-1-2 loc-2-1 loc-2-2 loc-2-3 loc-3-1 loc-3-2 loc-3-3 loc-3-4 loc-4-1 loc-4-2 loc-4-3 loc-4-4 loc-5-2 loc-5-3 loc-5-4 - ubicacio
@@ -9,8 +10,9 @@
   )
   
   (:init
-    (grimmy-a loc-1-2)
-    
+    ; On es troba inicialment en Grimmy
+    (grimmy-a loc-1-2) 
+
     ; Connexions
     (connectat loc-1-2 loc-2-2 c1222) 
     (connectat loc-2-1 loc-2-2 c2122) 
@@ -96,5 +98,5 @@
     (obert c4243)
   )
   
-  (:goal (and (grimmy-a loc-5-4)))
+  (:goal (and (grimmy-a loc-5-4))) ; L'ojectiu d'en Grimmy 
 )
