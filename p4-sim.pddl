@@ -1,6 +1,7 @@
 (define (problem p4-sim)
   (:domain laberint-simple)
 
+  ; Objectes utilitzats en el problema
   (:objects 
     vermell verd porpra arc_de_sant_marti groc - color
     loc-1-1 loc-1-2 loc-2-1 loc-2-2 loc-2-3 loc-2-4 loc-3-2 loc-3-3 loc-3-4 - ubicacio
@@ -9,9 +10,10 @@
   )
 
   (:init
+    ; On es troba inicialment en Grimmy
     (grimmy-a loc-1-1)
 
-    ;Connexions 
+    ; Connexions 
     (connectat loc-1-1 loc-1-2 c1112)
     (connectat loc-1-2 loc-2-2 c1222) 
     (connectat loc-2-1 loc-2-2 c2122) 
@@ -22,7 +24,7 @@
     (connectat loc-3-3 loc-3-4 c3334)
     
 
-    ;Claus i ubicació
+    ; Ubicació de les claus
     (clau-a clau1 loc-1-1)
     (clau-a clau2 loc-1-2)
     (clau-a clau3 loc-1-2)
@@ -45,13 +47,13 @@
     (bloquejat c2232 porpra)
     (bloquejat c3233 arc_de_sant_marti)
 
-    ;Passadissos oberts  
+    ;Passadissos oberts inicialment
     (obert c1222)
     (obert c3334)
     
   )
 
   (:goal 
-    (and (grimmy-a loc-3-4))
+     (grimmy-a loc-3-4) ; L'ojectiu d'en Grimmy 
   )
 )
