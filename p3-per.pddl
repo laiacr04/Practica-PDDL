@@ -98,5 +98,7 @@
     (obert c4243)
   )
   
-  (:goal (and (grimmy-a loc-5-4))) ; L'ojectiu d'en Grimmy 
+  (:goal 
+    (and (grimmy-a loc-5-4)) ; L'ojectiu d'en Grimmy 
+  ) 
 )
