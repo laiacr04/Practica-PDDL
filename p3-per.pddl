@@ -37,7 +37,7 @@
     (connectat loc-5-4 loc-4-4 c5444)
     (connectat loc-4-4 loc-3-4 c4434)
     
-    ; Passadissos perillosos
+    ; Passadissos perillosos (vermells)
     (perillos c2132)
     (perillos c2232)
     (perillos c2332)
