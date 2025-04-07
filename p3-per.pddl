@@ -54,15 +54,7 @@
     (clau-a clau4 loc-3-2)
     (clau-a clau5 loc-3-2)
     (clau-a clau6 loc-4-4)
-    
-    ; Tipus d'usos de les claus
-    (= (usos-restants clau1) 1000) ; pràcticament amb usos infinits
-    (= (usos-restants clau2) 1)
-    (= (usos-restants clau3) 1)
-    (= (usos-restants clau4) 1)
-    (= (usos-restants clau5) 1)
-    (= (usos-restants clau6) 1)
-    
+
     ; Colors de les claus
     (color-clau clau1 vermell)
     (color-clau clau2 verd)
@@ -70,6 +62,14 @@
     (color-clau clau4 porpra)
     (color-clau clau5 porpra)
     (color-clau clau6 arc_de_sant_marti)
+
+    ; Tipus d'usos de les claus
+    (= (usos-restants clau1) 1000) ; pràcticament amb usos infinits
+    (= (usos-restants clau2) 1)
+    (= (usos-restants clau3) 1)
+    (= (usos-restants clau4) 1)
+    (= (usos-restants clau5) 1)
+    (= (usos-restants clau6) 1)
     
     ; Passadissos bloquejats
     (bloquejat c2132 vermell)
