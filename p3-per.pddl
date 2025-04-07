@@ -56,7 +56,7 @@
     (clau-a clau6 loc-4-4)
     
     ; Tipus d'usos de les claus
-    (= (usos-restants clau1) 1000)
+    (= (usos-restants clau1) 1000) ; pràcticament amb usos infinits
     (= (usos-restants clau2) 1)
     (= (usos-restants clau3) 1)
     (= (usos-restants clau4) 1)
@@ -99,6 +99,6 @@
   )
   
   (:goal 
-    (and (grimmy-a loc-5-4)) ; L'ojectiu d'en Grimmy 
+     (grimmy-a loc-5-4) ; L'ojectiu d'en Grimmy 
   ) 
 )
