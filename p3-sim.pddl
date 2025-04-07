@@ -82,6 +82,6 @@
   )
 
   (:goal 
-    (grimmy-a loc-3-4)
+    (grimmy-a loc-3-4) ; L'ojectiu d'en Grimmy
   )
 )
