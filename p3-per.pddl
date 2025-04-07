@@ -13,7 +13,7 @@
     ; On es troba inicialment en Grimmy
     (grimmy-a loc-1-2) 
 
-    ; Connexions
+    ; Connexions entre ubicacions
     (connectat loc-1-2 loc-2-2 c1222) 
     (connectat loc-2-1 loc-2-2 c2122) 
     (connectat loc-2-1 loc-3-1 c2131) 
