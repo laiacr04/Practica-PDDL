@@ -1,7 +1,7 @@
 (define (domain laberint-perillos)
   (:requirements
     :typing                       
-    :negative-preconditions       
+    :negative-preconditions        
     :quantified-preconditions     
     :conditional-effects          
     :disjunctive-preconditions    
